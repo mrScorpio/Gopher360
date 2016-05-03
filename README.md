@@ -15,7 +15,8 @@ https://vine.co/v/MYadBgWXuWY
 Download Instructions
 ======
 Download the latest release here: https://github.com/wishIwasabear/Gopher360/releases
-I recommend you copy it somewhere outside of the ZIP and make a shortcut to it. Adding it to your startup folder in your HTPC can make bootups a lot more convenient!
+
+I recommend that you copy it somewhere outside of the ZIP and make a shortcut to it. Adding it to your startup folder in your HTPC can make bootups a lot more convenient!
 
 Default Controls
 ======
@@ -62,10 +63,10 @@ There is also a keybindings file keybindings.ini to customize the controller key
 
 You can set which controller buttons will activate the configuration events based on the official microsoft keys hexadecimal values.
 
-Virtual Windows Keys.
+Virtual Windows Keys:
 https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731
 
-XInput Controller Buttons.
+XInput Controller Buttons:
 https://msdn.microsoft.com/en-us/library/windows/desktop/microsoft.directx_sdk.reference.xinput_gamepad%28v=vs.85%29.aspx
 
 More instruction in the configuration file.
