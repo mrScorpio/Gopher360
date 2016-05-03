@@ -56,7 +56,9 @@ Default Controls
 
 Config file instructions
 ======
-There is a configuration file config.ini for simple keybindings.
+There is a configuration file config.ini to change some values.
+
+There is also a keybindings file keybindings.ini to customize the controller keybinds.
 
 You can set which controller buttons will activate the configuration events based on the official microsoft keys hexadecimal values.
 

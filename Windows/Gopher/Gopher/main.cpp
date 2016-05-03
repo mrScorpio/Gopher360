@@ -42,7 +42,7 @@ int main()
 {
 	CXBOXController controller(1);
 	Gopher gopher(&controller);
-	SetConsoleTitle( TEXT( "Gopher v0.986" ) );
+	SetConsoleTitle( TEXT( "Gopher v0.987" ) );
 
 	system("Color 1D");
 
@@ -59,6 +59,8 @@ int main()
 	}
 
 	gopher.loadConfigFile();
+
+	gopher.loadKeybindingFile();
 
 	while (true) {
 		gopher.loop();

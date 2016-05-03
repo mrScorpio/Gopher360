@@ -41,7 +41,38 @@ Gopher::Gopher(CXBOXController * controller)
 void Gopher::loadConfigFile()
 {
 	ConfigFile cfg("config.ini");
-	
+
+	DEAD_ZONE = cfg.getValueOfKey<int>("DEAD_ZONE");
+	SCROLL_DEAD_ZONE = cfg.getValueOfKey<int>("SCROLL_DEAD_ZONE");
+	TRIGGER_DEAD_ZONE = cfg.getValueOfKey<int>("TRIGGER_DEAD_ZONE");
+	SCROLL_SPEED = cfg.getValueOfKey<int>("SCROLL_SPEED");
+	FPS = cfg.getValueOfKey<int>("FPS");
+	SLEEP_VALUE = cfg.getValueOfKey<int>("SLEEP_VALUE");
+
+	SPEED_LOW = cfg.getValueOfKey<std::float_t>("SPEED_LOW");
+	SPEED_MED = cfg.getValueOfKey<std::float_t>("SPEED_MED");
+	SPEED_HIGH = cfg.getValueOfKey<std::float_t>("SPEED_HIGH");
+	speed = SPEED_MED;
+
+	_disabled = cfg.getValueOfKey<bool>("_disabled");
+	_hidden = cfg.getValueOfKey<bool>("_hidden");
+
+	if (_hidden)
+	{
+		HWND hWnd = GetConsoleWindow();
+		ShowWindow(hWnd, SW_HIDE);
+	}
+	else
+	{
+		HWND hWnd = GetConsoleWindow();
+		ShowWindow(hWnd, SW_SHOW);
+	}
+}
+
+void Gopher::loadKeybindingFile()
+{
+	ConfigFile cfg("keybindings.ini");
+
 	//Configuration bindings
 	CONFIG_MOUSE_LEFT = strtol(cfg.getValueOfKey<std::string>("CONFIG_MOUSE_LEFT").c_str(), 0, 0);
 	CONFIG_MOUSE_RIGHT = strtol(cfg.getValueOfKey<std::string>("CONFIG_MOUSE_RIGHT").c_str(), 0, 0);
@@ -72,7 +103,7 @@ void Gopher::loadConfigFile()
 }
 
 void Gopher::loop() {
-	Sleep(SLEEP_AMOUNT);
+	Sleep(SLEEP_VALUE/FPS);
 
 	_currentState = _controller->GetState();
 

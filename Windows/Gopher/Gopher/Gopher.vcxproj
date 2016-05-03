@@ -87,6 +87,10 @@
     <ClInclude Include="CXBOXController.h" />
     <ClInclude Include="Gopher.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="config.ini" />
+    <None Include="keybindings.ini" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

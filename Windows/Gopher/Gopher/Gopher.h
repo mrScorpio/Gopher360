@@ -14,27 +14,28 @@
 class Gopher
 {
 private:
-	const int DEAD_ZONE = 9000; //X and Y minimum, below this is ignored since all controllers have some stick to them
-	const int SCROLL_DEAD_ZONE = 9000; // Right thumbstick should be less sensitive.
-	const int TRIGGER_DEAD_ZONE = 0;
-	const int SCROLL_SPEED = 20; // Speed at which you scroll page.
-	const int FPS = 150;
-	const int SLEEP_AMOUNT = 1000/FPS; // number of milliseconds to sleep per iteration
+	int DEAD_ZONE = 0;
+	int SCROLL_DEAD_ZONE = 0;
+	int TRIGGER_DEAD_ZONE = 0;
+	int SCROLL_SPEED = 0; // Speed at which you scroll page.
+	int FPS = 0;
+	int SLEEP_VALUE = 0;
 
 	XINPUT_STATE _currentState;
 
-	const float SPEED_LOW = 0.032f;
-	const float SPEED_MED = 0.04f;
-	const float SPEED_HIGH = 0.072f;
+	float SPEED_LOW = 0;
+	float SPEED_MED = 0;
+	float SPEED_HIGH = 0;
 	float speed = SPEED_MED;
-
-	float _xRest = 0.0f;
-	float _yRest = 0.0f;
 
 	bool _disabled = false; //use for Select sleep mode
 	bool _hidden = false; //press Y to hide, check this var
+
 	bool _lTriggerPrevious = false;
 	bool _rTriggerPrevious = false;
+
+	float _xRest = 0;
+	float _yRest = 0;
 
 	//Mouse Clicks
 	DWORD CONFIG_MOUSE_LEFT = NULL;
@@ -76,6 +77,8 @@ public:
 	Gopher(CXBOXController* controller);
 
 	void loadConfigFile();
+
+	void loadKeybindingFile();
 
 	void loop();
 
