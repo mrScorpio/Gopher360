@@ -3,3 +3,5 @@ Windows/**/Debug
 Windows/**/Release
 *.opensdf
 *.sdf
+*.VC.db
+*.VC.VC.opendb
