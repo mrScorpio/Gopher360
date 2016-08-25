@@ -13,4 +13,5 @@ public:
 	XINPUT_STATE GetState();
 	bool IsConnected();
 	void CXBOXController::Vibrate(int leftVal, int rightVal);
+	int getContNum();
 };

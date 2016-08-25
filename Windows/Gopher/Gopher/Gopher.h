@@ -14,6 +14,8 @@
 class Gopher
 {
 private:
+	typedef DWORD(WINAPI* XInputPowerOffController)(DWORD i);
+
 	const int DEAD_ZONE = 9000; //X and Y minimum, below this is ignored since all controllers have some stick to them
 	const int SCROLL_DEAD_ZONE = 9000; // Right thumbstick should be less sensitive.
 	const int TRIGGER_DEAD_ZONE = 0;
@@ -45,6 +47,7 @@ private:
 	DWORD CONFIG_HIDE = NULL;
 	DWORD CONFIG_DISABLE = NULL;
 	DWORD CONFIG_SPEED_CHANGE = NULL;
+	DWORD CONFIG_PWR_OFF = NULL;
 
 	//Gamepad bindings
 	DWORD GAMEPAD_DPAD_UP = NULL;
@@ -71,9 +74,14 @@ private:
 
 	CXBOXController* _controller;
 
+	HINSTANCE _hXInputDll;
+	XInputPowerOffController _powerOffCallback;
+
 public:
 
 	Gopher(CXBOXController* controller);
+
+	~Gopher();
 
 	void loadConfigFile();
 
@@ -98,4 +106,9 @@ public:
 	void mapMouseClick(DWORD STATE, DWORD keyDown, DWORD keyUp);
 
 	void setXboxClickState(DWORD state);
+
+	void setupPowerOffCallback();
+
+	void handlePowerOff();
+
 };

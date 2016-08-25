@@ -36,6 +36,15 @@ void mouseEvent(DWORD dwFlags, DWORD mouseData = 0)
 Gopher::Gopher(CXBOXController * controller)
 	: _controller(controller)
 {
+	setupPowerOffCallback();
+}
+
+Gopher::~Gopher()
+{
+	if (SUCCEEDED(_hXInputDll))
+	{
+		FreeLibrary(_hXInputDll);
+	}
 }
 
 void Gopher::loadConfigFile()
@@ -49,6 +58,7 @@ void Gopher::loadConfigFile()
 	CONFIG_HIDE = strtol(cfg.getValueOfKey<std::string>("CONFIG_HIDE").c_str(), 0, 0);
 	CONFIG_DISABLE = strtol(cfg.getValueOfKey<std::string>("CONFIG_DISABLE").c_str(), 0, 0);
 	CONFIG_SPEED_CHANGE = strtol(cfg.getValueOfKey<std::string>("CONFIG_SPEED_CHANGE").c_str(), 0, 0);
+	CONFIG_PWR_OFF = strtol(cfg.getValueOfKey<std::string>("CONFIG_PWR_OFF").c_str(), 0, 0);
 
 	//Controller bindings
 	GAMEPAD_DPAD_UP = strtol(cfg.getValueOfKey<std::string>("GAMEPAD_DPAD_UP").c_str(), 0, 0);
@@ -76,12 +86,19 @@ void Gopher::loop() {
 
 	_currentState = _controller->GetState();
 
+	// the controller is turned off
+	if (_currentState.dwPacketNumber == NULL)
+	{
+		return;
+	}
+
 	handleDisableButton();
 	if (_disabled)
 	{
 		return;
 	}
 
+	handlePowerOff();
 	handleMouseMovement();
 	handleScrolling();
 
@@ -369,5 +386,29 @@ void Gopher::mapMouseClick(DWORD STATE, DWORD keyDown, DWORD keyUp)
 	if (_xboxClickIsUp[STATE])
 	{
 		mouseEvent(keyUp);
+	}
+}
+
+void Gopher::setupPowerOffCallback()
+{
+	if (SUCCEEDED(_hXInputDll = LoadLibraryA("XInput1_3.dll")))
+	{
+		_powerOffCallback = (XInputPowerOffController)GetProcAddress(_hXInputDll, (LPCSTR)103);
+	}
+	else
+	{
+		printf("\nWarning: Could not set up power off functionality.\n");
+	}
+}
+
+void Gopher::handlePowerOff()
+{
+	setXboxClickState(CONFIG_PWR_OFF);
+	if (SUCCEEDED(_hXInputDll) && _xboxClickIsDown[CONFIG_PWR_OFF])
+	{
+		if (SUCCEEDED(_powerOffCallback(_controller->getContNum())))
+		{
+			printf("Controller number %u is powered off \n\n", _controller->getContNum() + 1);
+		}
 	}
 }

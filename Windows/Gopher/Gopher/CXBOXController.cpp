@@ -35,3 +35,8 @@ void CXBOXController::Vibrate(int leftVal, int rightVal)
 	// Vibrate the controller
 	XInputSetState(_controllerNum, &Vibration);
 }
+
+int CXBOXController::getContNum()
+{
+	return _controllerNum;
+}
