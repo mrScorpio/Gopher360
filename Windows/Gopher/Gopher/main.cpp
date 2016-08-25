@@ -38,9 +38,19 @@ xinput
 http://msdn.microsoft.com/en-us/library/windows/desktop/microsoft.directx_sdk.reference.xinput_gamepad%28v=vs.85%29.aspx
 */
 
-int main()
+int main(int argc, char *argv[])
 {
-	CXBOXController controller(1);
+	// enter controller number when start program, by default number 1 is connected
+	int contNum;
+	if (argc > 1)
+		contNum = atoi(argv[1]);
+	else
+		contNum = 1;
+
+	if ((contNum > 4) || (contNum < 1))
+		contNum = 1;
+
+	CXBOXController controller(contNum);
 	Gopher gopher(&controller);
 	SetConsoleTitle( TEXT( "Gopher v0.986" ) );
 
@@ -59,6 +69,7 @@ int main()
 	}
 
 	gopher.loadConfigFile();
+	gopher.toggleWindowVisibility();	//let it starts hidden
 
 	while (true) {
 		gopher.loop();
