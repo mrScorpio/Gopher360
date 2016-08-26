@@ -22,7 +22,8 @@
 #include <iostream>
 
 
-#pragma comment(lib, "XInput9_1_0.lib")
+//#pragma comment(lib, "XInput9_1_0.lib")
+#pragma comment(lib, "XInput.lib")	//for battery info
 #pragma comment(lib, "winmm") //for volume
 
 #include "Gopher.h"

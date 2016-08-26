@@ -215,6 +215,9 @@ void Gopher::toggleWindowVisibility()
 		HWND hWnd = GetConsoleWindow();
 		ShowWindow(hWnd, SW_SHOW);
 		printf("Window unhidden\n");
+		_curBatInfo = _controller->GetBatInfo();
+		printf("Controller number: %u \n", _controller->getContNum() + 1);
+		printf("Battery type: %u, Charge level: %u \n\n", _curBatInfo.BatteryType, _curBatInfo.BatteryLevel);
 	}
 }
 

@@ -77,6 +77,8 @@ private:
 	HINSTANCE _hXInputDll;
 	XInputPowerOffController _powerOffCallback;
 
+	XINPUT_BATTERY_INFORMATION _curBatInfo;
+
 public:
 
 	Gopher(CXBOXController* controller);
