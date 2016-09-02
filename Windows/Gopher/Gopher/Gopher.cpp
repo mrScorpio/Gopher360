@@ -37,6 +37,8 @@ Gopher::Gopher(CXBOXController * controller)
 	: _controller(controller)
 {
 	setupPowerOffCallback();
+	SCROLL_SPEED = 20;
+	SCROLL_SPEED_X = 20;
 }
 
 Gopher::~Gopher()
@@ -269,11 +271,9 @@ void Gopher::handleMouseMovement()
 
 void Gopher::handleScrolling()
 {
-	bool holdScrollUp = _currentState.Gamepad.sThumbRY > SCROLL_DEAD_ZONE;
-	bool holdScrollDown = _currentState.Gamepad.sThumbRY < -SCROLL_DEAD_ZONE;
-
-	if (holdScrollUp)
+	if (abs(_currentState.Gamepad.sThumbRY) > SCROLL_DEAD_ZONE)
 	{
+		SCROLL_SPEED = _currentState.Gamepad.sThumbRY / 1000;
 		INPUT input;
 		input.type = INPUT_MOUSE;
 		input.mi.mouseData = SCROLL_SPEED;
@@ -282,12 +282,13 @@ void Gopher::handleScrolling()
 		SendInput(1, &input, sizeof(INPUT));
 	}
 
-	if (holdScrollDown)
+	if (abs(_currentState.Gamepad.sThumbRX) > SCROLL_DEAD_ZONE)
 	{
+		SCROLL_SPEED_X = _currentState.Gamepad.sThumbRX / 1000;
 		INPUT input;
 		input.type = INPUT_MOUSE;
-		input.mi.mouseData = -SCROLL_SPEED;
-		input.mi.dwFlags = MOUSEEVENTF_WHEEL;
+		input.mi.mouseData = SCROLL_SPEED_X;
+		input.mi.dwFlags = MOUSEEVENTF_HWHEEL;
 		input.mi.time = 0;
 		SendInput(1, &input, sizeof(INPUT));
 	}

@@ -19,7 +19,6 @@ private:
 	const int DEAD_ZONE = 9000; //X and Y minimum, below this is ignored since all controllers have some stick to them
 	const int SCROLL_DEAD_ZONE = 9000; // Right thumbstick should be less sensitive.
 	const int TRIGGER_DEAD_ZONE = 0;
-	const int SCROLL_SPEED = 20; // Speed at which you scroll page.
 	const int FPS = 150;
 	const int SLEEP_AMOUNT = 1000/FPS; // number of milliseconds to sleep per iteration
 
@@ -29,6 +28,9 @@ private:
 	const float SPEED_MED = 0.04f;
 	const float SPEED_HIGH = 0.072f;
 	float speed = SPEED_MED;
+
+	int SCROLL_SPEED;	// Speed at which you scroll page.
+	int SCROLL_SPEED_X;
 
 	float _xRest = 0.0f;
 	float _yRest = 0.0f;
