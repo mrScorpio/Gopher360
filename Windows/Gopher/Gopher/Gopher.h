@@ -21,6 +21,7 @@ private:
 	const int TRIGGER_DEAD_ZONE = 0;
 	const int FPS = 150;
 	const int SLEEP_AMOUNT = 1000/FPS; // number of milliseconds to sleep per iteration
+	const int SCROLL_MAX = 50;
 
 	XINPUT_STATE _currentState;
 
@@ -29,9 +30,8 @@ private:
 	const float SPEED_HIGH = 0.072f;
 	float speed = SPEED_MED;
 
-	int SCROLL_SPEED;	// Speed at which you scroll page.
-	int SCROLL_SPEED_X;
-
+	float SCROLL_SPEED;	// Speed at which you scroll page.
+	
 	float _xRest = 0.0f;
 	float _yRest = 0.0f;
 
