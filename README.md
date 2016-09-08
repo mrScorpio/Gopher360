@@ -14,8 +14,6 @@ https://vine.co/v/MYadBgWXuWY
 
 Download Instructions
 ======
-Download the latest release here: https://github.com/wishIwasabear/Gopher360/releases
-
 I recommend that you copy it somewhere outside of the ZIP and make a shortcut to it. Adding it to your startup folder in your HTPC can make bootups a lot more convenient!
 
 Default Controls
@@ -31,9 +29,7 @@ Default Controls
 
 **D-pad**: Arrow keys.
 
-**Right Analog**: Scroll up/down.
-
-**Right Analog Click**: F2.
+**Right Analog**: Scroll up/down, left/right.
 
 **Left Analog**: Mouse.
 
@@ -43,7 +39,9 @@ Default Controls
 
 **Start**: Left Windows Key
 
-**Back + Start**: Toggle. Useful for when you launch emulators or open Steam Big Picture mode. Press again to re-enable.
+**Right Analog Click + Start**: Toggle. Useful for when you launch emulators or open Steam Big Picture mode. Press again to re-enable.
+
+**Right Analog Click + Back**: Power off controller.
 
 **LBumper**: Browser previous
 
