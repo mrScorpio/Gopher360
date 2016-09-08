@@ -17,6 +17,7 @@
 //changes 0.97 -> 0.98: performance improvements, operational volume function, shorter beeps, no XY text
 //changes 0.98 -> 0.985: 144Hz, Y to hide window(added float stillHoldingY), code cleanup, comments added
 //changes 0.985 -> 0.986: Adding configuration file, changing from beeps to vibration.
+//changes 0.986 -> 0.987: Adding ability to power off controller, scrolling with variable speed in both axises, information about battery
 
 #include <Windows.h> //for Beep()
 #include <iostream>
@@ -31,8 +32,7 @@
 bool ChangeVolume(double nVolume, bool bScalar); //not used yet
 BOOL isRunningAsAdministrator(); //check if administrator, makes on-screen keyboard clickable
 
-/*To do:
-* Enable/disable button
+/*
 Key Codes:
 http://msdn.microsoft.com/en-us/library/windows/desktop/dd375731%28v=vs.85%29.aspx
 xinput
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 
 	CXBOXController controller(contNum);
 	Gopher gopher(&controller);
-	SetConsoleTitle( TEXT( "Gopher v0.986" ) );
+	SetConsoleTitle( TEXT( "Gopher v0.987" ) );
 
 	system("Color 1D");
 
