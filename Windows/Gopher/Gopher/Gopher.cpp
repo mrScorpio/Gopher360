@@ -216,9 +216,15 @@ void Gopher::toggleWindowVisibility()
 		HWND hWnd = GetConsoleWindow();
 		ShowWindow(hWnd, SW_SHOW);
 		printf("Window unhidden\n");
-		_curBatInfo = _controller->GetBatInfo();
 		printf("Controller number: %u \n", _controller->getContNum() + 1);
-		printf("Battery type: %u, Charge level: %u \n\n", _curBatInfo.BatteryType, _curBatInfo.BatteryLevel);
+		if (_batInfoCallback!=NULL)
+		{
+			ZeroMemory(&this->_curBatInfo, sizeof(XINPUT_BATTERY_INFORMATION));
+			_batInfoCallback(_controller->getContNum(), BATTERY_DEVTYPE_GAMEPAD, &this->_curBatInfo);
+			printf("Battery type: %u, Charge level(0-3): %u \n\n", _curBatInfo.BatteryType, _curBatInfo.BatteryLevel);
+		}
+		else
+			printf("Can't get battery info. XInput1_3.dll is needed!");
 	}
 }
 
@@ -397,6 +403,7 @@ void Gopher::setupPowerOffCallback()
 	if (SUCCEEDED(_hXInputDll = LoadLibraryA("XInput1_3.dll")))
 	{
 		_powerOffCallback = (XInputPowerOffController)GetProcAddress(_hXInputDll, (LPCSTR)103);
+		_batInfoCallback = (XInputGetBatInfo)GetProcAddress(_hXInputDll, (LPCSTR)"XInputGetBatteryInformation");
 	}
 	else
 	{

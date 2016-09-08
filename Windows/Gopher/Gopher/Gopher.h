@@ -15,6 +15,7 @@ class Gopher
 {
 private:
 	typedef DWORD(WINAPI* XInputPowerOffController)(DWORD i);
+	typedef DWORD(WINAPI* XInputGetBatInfo)(DWORD dwUserIndex, BYTE devType, XINPUT_BATTERY_INFORMATION* pBatteryInformation);
 
 	const int DEAD_ZONE = 9000; //X and Y minimum, below this is ignored since all controllers have some stick to them
 	const int SCROLL_DEAD_ZONE = 9000; // Right thumbstick should be less sensitive.
@@ -80,6 +81,8 @@ private:
 	XInputPowerOffController _powerOffCallback;
 
 	XINPUT_BATTERY_INFORMATION _curBatInfo;
+
+	XInputGetBatInfo _batInfoCallback;
 
 public:
 

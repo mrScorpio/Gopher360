@@ -40,10 +40,3 @@ int CXBOXController::getContNum()
 {
 	return _controllerNum;
 }
-
-XINPUT_BATTERY_INFORMATION CXBOXController::GetBatInfo()
-{
-	ZeroMemory(&this->_batInfo, sizeof(XINPUT_BATTERY_INFORMATION));
-	XInputGetBatteryInformation(_controllerNum, BATTERY_DEVTYPE_GAMEPAD, &this->_batInfo);
-	return _batInfo;
-}

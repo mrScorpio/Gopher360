@@ -22,8 +22,8 @@
 #include <iostream>
 
 
-//#pragma comment(lib, "XInput9_1_0.lib")
-#pragma comment(lib, "XInput.lib")	//for battery info
+#pragma comment(lib, "XInput9_1_0.lib")	//if win7+
+//#pragma comment(lib, "XInput.lib")	//if win8+
 #pragma comment(lib, "winmm") //for volume
 
 #include "Gopher.h"
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 
 	gopher.loadConfigFile();
 	gopher.toggleWindowVisibility();	//let it starts hidden
-
+	
 	while (true) {
 		gopher.loop();
 	}
