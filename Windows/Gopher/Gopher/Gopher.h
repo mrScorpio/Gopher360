@@ -51,6 +51,8 @@ private:
 	DWORD CONFIG_DISABLE = NULL;
 	DWORD CONFIG_SPEED_CHANGE = NULL;
 	DWORD CONFIG_PWR_OFF = NULL;
+	DWORD CONFIG_NXT_WND = NULL;
+	DWORD CONFIG_PRV_WND = NULL;
 
 	//Gamepad bindings
 	DWORD GAMEPAD_DPAD_UP = NULL;
@@ -117,5 +119,9 @@ public:
 	void setupPowerOffCallback();
 
 	void handlePowerOff();
+
+	void handleChngNxtWindow();
+
+	void handleChngPrvWindow();
 
 };

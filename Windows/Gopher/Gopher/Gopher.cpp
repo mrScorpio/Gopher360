@@ -60,6 +60,8 @@ void Gopher::loadConfigFile()
 	CONFIG_DISABLE = strtol(cfg.getValueOfKey<std::string>("CONFIG_DISABLE").c_str(), 0, 0);
 	CONFIG_SPEED_CHANGE = strtol(cfg.getValueOfKey<std::string>("CONFIG_SPEED_CHANGE").c_str(), 0, 0);
 	CONFIG_PWR_OFF = strtol(cfg.getValueOfKey<std::string>("CONFIG_PWR_OFF").c_str(), 0, 0);
+	CONFIG_NXT_WND = strtol(cfg.getValueOfKey<std::string>("CONFIG_NXT_WND").c_str(), 0, 0);
+	CONFIG_PRV_WND = strtol(cfg.getValueOfKey<std::string>("CONFIG_PRV_WND").c_str(), 0, 0);
 
 	//Controller bindings
 	GAMEPAD_DPAD_UP = strtol(cfg.getValueOfKey<std::string>("GAMEPAD_DPAD_UP").c_str(), 0, 0);
@@ -102,7 +104,9 @@ void Gopher::loop() {
 	handlePowerOff();
 	handleMouseMovement();
 	handleScrolling();
-
+	handleChngNxtWindow();
+	handleChngPrvWindow();
+	
 	//Mouse functions
 	if (CONFIG_MOUSE_LEFT)
 		mapMouseClick(CONFIG_MOUSE_LEFT, MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTUP);
@@ -225,6 +229,38 @@ void Gopher::toggleWindowVisibility()
 		}
 		else
 			printf("Can't get battery info. XInput1_3.dll is needed!");
+	}
+}
+
+void Gopher::handleChngNxtWindow()
+{
+	setXboxClickState(CONFIG_NXT_WND);
+	if (_xboxClickIsDown[CONFIG_NXT_WND])
+	{
+		inputKeyboardDown(VK_MENU);
+		inputKeyboardDown(VK_ESCAPE);
+	}
+	if (_xboxClickIsUp[CONFIG_NXT_WND])
+	{
+		inputKeyboardUp(VK_ESCAPE);
+		inputKeyboardUp(VK_MENU);
+	}
+}
+
+void Gopher::handleChngPrvWindow()
+{
+	setXboxClickState(CONFIG_PRV_WND);
+	if (_xboxClickIsDown[CONFIG_PRV_WND])
+	{
+		inputKeyboardDown(VK_MENU);
+		inputKeyboardDown(VK_SHIFT);
+		inputKeyboardDown(VK_ESCAPE);
+	}
+	if (_xboxClickIsUp[CONFIG_PRV_WND])
+	{
+		inputKeyboardUp(VK_ESCAPE);
+		inputKeyboardUp(VK_SHIFT);
+		inputKeyboardUp(VK_MENU);
 	}
 }
 
